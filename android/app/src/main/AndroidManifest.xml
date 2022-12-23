@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.quadratic_equation_solver">
+    package="com.gocreativetm.quadratic_equation_solver">
    <application
-        android:label="quadratic_equation_solver"
+        android:label="Quadratic Equation Solver"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

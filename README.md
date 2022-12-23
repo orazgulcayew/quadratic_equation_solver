@@ -1,4 +1,4 @@
-# quadratic_equation_solver
+# Quadratic Equation Solver
 
 A new Flutter project.
 

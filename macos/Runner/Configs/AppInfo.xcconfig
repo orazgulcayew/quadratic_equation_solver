@@ -8,7 +8,7 @@
 PRODUCT_NAME = quadratic_equation_solver
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.quadraticEquationSolver
+PRODUCT_BUNDLE_IDENTIFIER = com.gocreativetm.quadraticEquationSolver
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.gocreativetm. All rights reserved.

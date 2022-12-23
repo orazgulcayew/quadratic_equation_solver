@@ -1,4 +1,4 @@
-package com.example.quadratic_equation_solver
+package com.gocreativetm.quadratic_equation_solver
 
 import io.flutter.embedding.android.FlutterActivity
 
