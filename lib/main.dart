@@ -4,18 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const QuadraticEqSolverApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class QuadraticEqSolverApp extends StatefulWidget {
+  const QuadraticEqSolverApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<QuadraticEqSolverApp> createState() => _QuadraticEqSolverAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _QuadraticEqSolverAppState extends State<QuadraticEqSolverApp> {
   bool isDark = false;
+  bool hasError = false;
 
   double a = 0,
       b = 0,
@@ -37,22 +38,29 @@ class _MyAppState extends State<MyApp> {
   String cText = "+c";
 
   doGeneralQuadraticFormula() {
-    setState(() {
-      a = double.parse(t1.text);
-      b = double.parse(t2.text);
-      c = double.parse(t3.text);
-      discr = b * b - 4 * a * c;
-      real = -b / (2 * a);
-      imag = sqrt(-discr) / (2 * a);
+    try {
+      setState(() {
+        hasError = false;
+        a = double.parse(t1.text);
+        b = double.parse(t2.text);
+        c = double.parse(t3.text);
+        discr = b * b - 4 * a * c;
+        real = -b / (2 * a);
+        imag = sqrt(-discr) / (2 * a);
 
-      if (discr > 0) {
-        root1 = ((-1 * b) + sqrt(discr)) / (2 * a);
-        root2 = ((-1 * b) - sqrt(discr)) / (2 * a);
-      } else {
-        root1 = real;
-        root2 = imag;
-      }
-    });
+        if (discr > 0) {
+          root1 = ((-1 * b) + sqrt(discr)) / (2 * a);
+          root2 = ((-1 * b) - sqrt(discr)) / (2 * a);
+        } else {
+          root1 = real;
+          root2 = imag;
+        }
+      });
+    } catch (e) {
+      setState(() {
+        hasError = true;
+      });
+    }
   }
 
   @override
@@ -145,7 +153,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
               ),
-              const Divider(height: 24),
+              const Divider(height: 32),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -228,20 +236,37 @@ class _MyAppState extends State<MyApp> {
                 ],
               ),
               const SizedBox(height: 24),
+              Visibility(
+                visible: hasError,
+                child: const Text(
+                  "Girizilen deňleme nädogry!",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Color.fromARGB(255, 247, 63, 63),
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 8),
               SizedBox(
                 width: double.infinity,
                 child: CupertinoButton(
                   onPressed: () {
                     if (t1.text.isNotEmpty &&
                         t2.text.isNotEmpty &&
-                        t3.text.isNotEmpty) doGeneralQuadraticFormula();
+                        t3.text.isNotEmpty) {
+                      doGeneralQuadraticFormula();
+                    } else {
+                      setState(() {
+                        hasError = true;
+                      });
+                    }
                   },
                   color: Colors.indigo,
                   child: const Text('Deňlemäni çöz'),
                 ),
               ),
               const Divider(
-                height: 30,
+                height: 32,
               ),
             ],
           ),
